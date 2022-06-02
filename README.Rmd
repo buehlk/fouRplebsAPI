@@ -74,6 +74,15 @@ mallorca_snippet <- search_4chan_snippet(boards = "trv", start_date = "2021-01-0
 
 str(recentAdv, vec.len = 1, nchar.max = 60)
 ```
+Note that the function search_4chan_snippet() also prints the total number of search results and the estimated time to retrieve them with search_4chan(). This estimation is based on 5 requests per minute API limit.
+
+Users only interested in the number of results can just retrieve them by changing the parameter result_type to "results_num". Now one can compare the number of posts mentioning Mallorca between different time periods. For example, pre-pandemic vs. post-pandemic:
+
+```{r example3}
+mallorca_pre <- search_4chan_snippet(boards = "trv", start_date = "2018-01-01", end_date = "2019-12-31", text = "mallorca", result_type = "results_num")
+
+str(recentAdv, vec.len = 1, nchar.max = 60)
+```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
 
