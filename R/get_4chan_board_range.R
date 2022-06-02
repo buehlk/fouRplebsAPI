@@ -4,7 +4,7 @@
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
 #' @param page_start Integer, Start of page range
 #' @param page_stop Integer, End of page range
-#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE
+#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE
 #' @param cool Integer (seconds), The 4plebs API includes an undocumented API rate limit, a cool-down period is recommended. , Default: 5
 #' @return Dataframe with details on all posts on a given board page.
 #' @details Variables in API output:\cr\cr
@@ -32,7 +32,7 @@
 #' @rdname get_4chan_board_range
 #' @export
 
-get_4chan_board_range <- function(board, page_start, page_stop, latest_comments = T, cool = 5){
+get_4chan_board_range <- function(board, page_start, page_stop, latest_comments = TRUE, cool = 5){
   range <- page_start:page_stop
   do.call("rbind", lapply(range, function(i){get_4chan_board_index(board = board, page = i, latest_comments = latest_comments, cool = cool)}))
 }

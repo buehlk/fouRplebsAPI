@@ -48,7 +48,10 @@
 search_4chan <- function(start_date = "", end_date = "", boards, text = "", subject = "", filename = "", ghost = "all", user_id = "", tripcode = "", type = "all",
                          username = "", country = "", results = "all", show_only = "all", deleted = "all", capcode = "user", order = "asc", cool = 20){ #API limit of max. 5 requests per minute
 
-  total_results_num <- search_4chan_snippet(start_date = start_date, end_date = end_date, boards, text = text, subject = subject, filename = filename, ghost = ghost, user_id = user_id, tripcode = tripcode, type = type, username = username, country = country, results = results, show_only = show_only, deleted = deleted, capcode = capcode, order = order, cool = 20, result_type = "results_num", page = 1)[1]
+  total_results_num <- search_4chan_snippet(start_date = start_date, end_date = end_date, boards, text = text, subject = subject, filename = filename,
+                                            ghost = ghost, user_id = user_id, tripcode = tripcode, type = type, username = username, country = country,
+                                            results = results, show_only = show_only, deleted = deleted, capcode = capcode, order = order, cool = 20,
+                                            result_type = "results_num", page = 1)[1]
   search_results_num <- ifelse(total_results_num > 100000, 100000, total_results_num)
 
   range <- 1:ceiling(search_results_num/25)

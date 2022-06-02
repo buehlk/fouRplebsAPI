@@ -99,7 +99,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
 
   parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
 
-  if (httr::http_error(resp)|is.null(parsed[["error"]]) == F) {
+  if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",
@@ -116,11 +116,11 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    comments[which(comments == F)] <-  parsed[[1]][["posts"]] %>%
+    comments[which(comments == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map("comment") %>%
       unlist() %>%
       unname()
-    comments[which(comments == T)] <- NA
+    comments[which(comments == TRUE)] <- NA
 
     doc_id <- parsed[[1]][["posts"]] %>%
       purrr::map("doc_id") %>%
@@ -143,11 +143,11 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    media_link[which(media_link == F)] <-  parsed[[1]][["posts"]] %>%
+    media_link[which(media_link == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
       unlist(lapply(., is.null))
-    media_link[which(media_link == T)] <- NA
+    media_link[which(media_link == TRUE)] <- NA
 
     timestamp <- parsed[[1]][["posts"]] %>%
       purrr::map("timestamp") %>%
@@ -180,33 +180,33 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    nreplies[which(nreplies == F)] <-  parsed[[1]][["posts"]] %>%
+    nreplies[which(nreplies == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map("nreplies") %>%
       unlist() %>%
       unname()
-    nreplies[which(nreplies == T)] <- NA
+    nreplies[which(nreplies == TRUE)] <- NA
 
     poster_country <- parsed[[1]][["posts"]] %>%
       purrr::map("poster_country") %>%
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    poster_country[which(poster_country == F)] <-  parsed[[1]][["posts"]] %>%
+    poster_country[which(poster_country == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map("poster_country") %>%
       unlist() %>%
       unname()
-    poster_country[which(poster_country == T)] <- NA
+    poster_country[which(poster_country == TRUE)] <- NA
 
     title <- parsed[[1]][["posts"]] %>%
       purrr::map("title") %>%
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    title[which(title == F)] <-  parsed[[1]][["posts"]] %>%
+    title[which(title == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map("title") %>%
       unlist() %>%
       unname()
-    title[which(title == T)] <- NA
+    title[which(title == TRUE)] <- NA
 
     referencing_comment <- rep(NA, length(comments))
     referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments, ">>[0-9]*( |\\n)"))
