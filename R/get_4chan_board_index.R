@@ -2,7 +2,7 @@
 #' @description This function returns all 10 threads from a given board page index, starting from the latest thread
 #' @param board Character variable of the 4chan board.\cr
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
-#' #' @param page Integer of the board page index
+#' @param page Integer of the board page index
 #' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE
 #' @param cool Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0
 #' @return Dataframe with details on all posts on a given board page.

@@ -2,7 +2,7 @@
 #' @description Return 4chan thread by looking up its ID
 #' @param board Character variable of the 4chan board.\cr
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
-#' #' @param thread_id Dataframe with details of all posts in the thread.
+#' @param thread_id Dataframe with details of all posts in the thread.
 #' @return Dataframe with details on all posts in the thread.
 #' @details Variables in API output:
 #' thread_id: 4chan ID of the thread the post is situated in
