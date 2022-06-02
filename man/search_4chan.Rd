@@ -73,7 +73,7 @@ This function returns all 4chan posts specified by searchterms
 Variables in API output:\cr\cr
 thread_id: 4chan ID of the thread the post is situated in\cr
 doc_id: 4chan document ID\cr
-num: 4chan post ID\cr
+num: 4chan post ID \cr
 subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post\cr
 op: Binary, 1: Opening Post, 0: Reply Post\cr
 timestamp: Time sent in Posix time\cr
@@ -89,7 +89,8 @@ media_link: Download link to the media (e.g. images) that have been shared in th
 }
 \examples{
 \dontrun{
-search_4chan(boards = "trv", start_date = "2021-04-20", end_date = "2022-12-21", text = "mallorca|menorca")
+search_4chan(boards = "trv", start_date = "2021-04-20",
+    end_date = "2022-12-21", text = "mallorca|menorca")
 
 search_4chan(boards = "o", text = "simson", show_only = "image")
 }
