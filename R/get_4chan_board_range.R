@@ -25,7 +25,7 @@
 #' media_link: Download link to the media (e.g. images) that have been shared in the post
 #' @examples
 #' \dontrun{
-#' get_4chan_board_range(board = "0", page_start = 1, page_stop = 2)
+#' get_4chan_board_range(board = "o", page_start = 1, page_stop = 2)
 #'
 #' get_4chan_board_range(board = "0", page_start = 1, page_stop = 2, last_comments = TRUE)
 #' }
