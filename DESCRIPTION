@@ -1,11 +1,11 @@
 Package: fouRplebsAPI
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R implementation for the 4plebs.org API
 Version: 0.1.0
-Author: Who wrote it
+Author: person(given = "Kilian", family = "Buehling", role = c("aut", "cre"), email = kilian.buehling@fu-berlin.de)
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
