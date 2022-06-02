@@ -9,3 +9,5 @@ Description: This package allows queries to the 4plebs.org API. Researchers can 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/buehlk/fouRplebsAPI
+BugReports: https://github.com/buehlk/fouRplebsAPI/issues
