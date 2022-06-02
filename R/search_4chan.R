@@ -20,21 +20,21 @@
 #' @param order String, Return posts ordered by latest or oldest: "asc", "desc", Default: 'asc'
 #' @param cool Integer (seconds), The 4plebs API includes an API rate limit of 5 requests/min for the archive search. For multiple searches a cool-down is recommended , Default: 20
 #' @return Dataframe with details of the posts found.
-#' @details Variables in API output:
-#' thread_id: 4chan ID of the thread the post is situated in
-#' doc_id: 4chan document ID
-#' num: 4chan post ID
-#' subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post
-#' op: Binary, 1: Opening Post, 0: Reply Post
-#' timestamp: Time sent in Posix time
-#' fourchan_date: Time sent
-#' name: Author name
-#' title: Post title
-#' referencing_comment: The post_id this post is quoting
-#' comments: Text of the post
-#' poster_country: Author country
-#' nreplies: Number of replies
-#' formatted: Boolean, Has this post been formatted?
+#' @details Variables in API output:\cr\cr
+#' thread_id: 4chan ID of the thread the post is situated in\cr
+#' doc_id: 4chan document ID\cr
+#' num: 4chan post ID\cr
+#' subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post\cr
+#' op: Binary, 1: Opening Post, 0: Reply Post\cr
+#' timestamp: Time sent in Posix time\cr
+#' fourchan_date: Time sent\cr
+#' name: Author name\cr
+#' title: Post title\cr
+#' referencing_comment: The post_id this post is quoting\cr
+#' comments: Text of the post\cr
+#' poster_country: Author country\cr
+#' nreplies: Number of replies\cr
+#' formatted: Boolean, Has this post been formatted?\cr
 #' media_link: Download link to the media (e.g. images) that have been shared in the post
 #' @examples
 #' \dontrun{
