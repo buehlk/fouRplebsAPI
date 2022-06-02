@@ -1,17 +1,32 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
+#' @title Return threads for specific 4chan board index
+#' @description This function returns all 10 threads from a given board page index, starting from the latest thread
 #' @param board Character variable of the 4chan board.\cr
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
-#' #' @param page PARAM_DESCRIPTION
-#' @param latest_comments PARAM_DESCRIPTION, Default: F
-#' @param cool PARAM_DESCRIPTION, Default: 0
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' #' @param page Integer of the board page index
+#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE
+#' @param cool Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0
+#' @return Dataframe with details on all posts on a given board page.
+#' @details Variables in API output:
+#' thread_id: 4chan ID of the thread the post is situated in
+#' doc_id: 4chan document ID
+#' num: 4chan post ID
+#' subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post
+#' op: Binary, 1: Opening Post, 0: Reply Post
+#' timestamp: Time sent in Posix time
+#' fourchan_date: Time sent
+#' name: Author name
+#' title: Post title
+#' referencing_comment: The post_id this post is quoting
+#' comments: Text of the post
+#' poster_country: Author country
+#' nreplies: Number of replies
+#' formatted: Boolean, Has this post been formatted?
+#' media_link: Download link to the media (e.g. images) that have been shared in the post
 #' @examples
 #' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
+#' get_4chan_board_index(board = "mo", page = 1, latest_comments = TRUE)
+#'
+#' get_4chan_board_index(board = "mo", page = 1, latest_comments = FALSE)
 #' }
 #' @seealso
 #'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
