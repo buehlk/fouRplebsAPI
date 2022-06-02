@@ -21,7 +21,7 @@
 #' @param cool Integer (seconds), The 4plebs API includes an API rate limit of 5 requests/min for the archive search. For multiple searches a cool-down is recommended , Default: 0
 #' @param page Index of search result, Default: 1
 #' @param result_type String, Return output on the post level or only the number of posts found: "snippet", "results_num", Default: 'snippet'
-#' @return Dataframe with details on all posts on a given board page.
+#' @return Dataframe with details on the most recent/oldest posts found.
 #' @details Variables in API output:
 #' thread_id: 4chan ID of the thread the post is situated in
 #' doc_id: 4chan document ID
