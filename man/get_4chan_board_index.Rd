@@ -8,8 +8,9 @@ get_4chan_board_index(board, page, latest_comments = F, cool = 0)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
-#' @param page Integer of the board page index}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+
+\item{page}{Integer of the board page index}
 
 \item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE}
 

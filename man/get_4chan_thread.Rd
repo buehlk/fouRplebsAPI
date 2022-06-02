@@ -8,8 +8,9 @@ get_4chan_thread(board, thread_id)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
-#' @param thread_id Dataframe with details of all posts in the thread.}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+
+\item{thread_id}{Dataframe with details of all posts in the thread.}
 }
 \value{
 Dataframe with details on all posts in the thread.
