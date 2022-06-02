@@ -80,16 +80,21 @@ Users only interested in the number of results can just retrieve them by changin
 
 ```{r example3}
 mallorca_pre <- search_4chan_snippet(boards = "trv", start_date = "2018-01-01", end_date = "2019-12-31", text = "mallorca", result_type = "results_num")
+mallorca_post <- search_4chan_snippet(boards = "trv", start_date = "2020-01-01", end_date = "2021-12-31", text = "mallorca", result_type = "results_num")
 
-str(recentAdv, vec.len = 1, nchar.max = 60)
+data.frame("Years" = c("2018 & 2019", "2020 & 2021"),
+       "Total results" = c(mallorca_pre["total_found"], mallorca_post["total_found"])
+       )
 ```
+It seems that this island has been mentioned more as people tended to stay home.
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+Researchers interested in gathering more data than just a snippet of the posts can use the function search_4chan(). Staying with the example of posts mentioning Mallorca over time, one could be inclined to ask, whether the image of Mallorca has changed during the pandemic. Apart from simply getting *all* the posts mentioning a search term, it is for example possible to filter for posts containing image data:
 
-You can also embed plots, for example:
+```{r example4}
+mallorca_pre_pics <- search_4chan(boards = "trv", start_date = "2018-01-01", end_date = "2019-12-31", text = "mallorca", show_only = "image")
+mallorca_post_pics <- search_4chan_snippet(boards = "trv", start_date = "2018-01-01", end_date = "2019-12-31", text = "mallorca", show_only = "image")
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+head(mallorca_post_pics$media_link)
 ```
+The column media_link provides the downloadable image links of the posts retrieved.
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
