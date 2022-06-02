@@ -44,7 +44,7 @@
 #' actual_query_result: The 4plebs API limits the search results shown. This limit is 100,000 results. If the number of total posts found exceeds this limit, the actual_query_results are capped.
 #' @examples
 #' \dontrun{
-#' search_4chan_snippet(boards = "adv", text = "kitties", show_only = "image")
+#' t <- search_4chan_snippet(boards = "adv", text = "kitties", show_only = "image")
 #'
 #' search_4chan_snippet(boards = "pol", country = "BR", result_type = "results_num")
 #' }
@@ -236,11 +236,11 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     )
 
     if(cool == 0){
-      if(parsed$meta$total_found >= parsed$meta$max_results){
+      if(parsed$meta$total_found > as.numeric(parsed$meta$max_results)){
         cat(paste("The amount of", parsed$meta$total_found,"search results found exceeds the API limit of 100000.\n"))
       }
-      cat(paste("The", (page-1)*25+1, "-", (page-1)*25+nrow(query_result), ifelse(order == "asc", "oldest", "newest"), ifelse(results == "", "posts", "threads"), "of the", ifelse(parsed$meta$total_found <= parsed$meta$max_results, parsed$meta$total_found, parsed$meta$max_results), "total search results","are shown.\n"))
-      cat(paste("Scraping all", ifelse(parsed$meta$total_found <= parsed$meta$max_results, parsed$meta$total_found, parsed$meta$max_results),"results would take ~", (ceiling(as.numeric(ifelse(parsed$meta$total_found <= parsed$meta$max_results, parsed$meta$total_found, parsed$meta$max_results))/25)*20)/60), "minutes.")
+      cat(paste("The", (page-1)*25+1, "-", (page-1)*25+nrow(query_result), ifelse(order == "asc", "oldest", "newest"), ifelse(results == "", "posts", "threads"), "of the", ifelse(parsed$meta$total_found <= as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)), "total search results","are shown.\n"))
+      cat(paste("Scraping all", ifelse(parsed$meta$total_found < as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)),"results would take ~", round(ceiling(as.numeric(ifelse(parsed$meta$total_found < as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)))/25)*20/60, 2), "minutes."))
       query_result
     }else{
       Sys.sleep(cool)
@@ -248,6 +248,6 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     }
   }else{
     Sys.sleep(cool)
-    c("total_found" = parsed$meta$total_found, "actual_query_result" = ifelse(parsed$meta$max_results <= parsed$meta$total_found, parsed$meta$total_found, parsed$meta$max_results))
+    c("total_found" = parsed$meta$total_found, "actual_query_result" = ifelse(as.numeric(parsed$meta$max_results) <= parsed$meta$total_found, parsed$meta$total_found, as.numeric(parsed$meta$max_results)))
   }
 }
