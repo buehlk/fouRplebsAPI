@@ -8,7 +8,7 @@ get_4chan_board_range(
   board,
   page_start,
   page_stop,
-  latest_comments = T,
+  latest_comments = TRUE,
   cool = 5
 )
 }
@@ -20,7 +20,7 @@ Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", 
 
 \item{page_stop}{Integer, End of page range}
 
-\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE}
+\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE}
 
 \item{cool}{Integer (seconds), The 4plebs API includes an undocumented API rate limit, a cool-down period is recommended. , Default: 5}
 }
@@ -52,6 +52,6 @@ media_link: Download link to the media (e.g. images) that have been shared in th
 \dontrun{
 get_4chan_board_range(board = "o", page_start = 1, page_stop = 2)
 
-get_4chan_board_range(board = "0", page_start = 1, page_stop = 2, last_comments = TRUE)
+get_4chan_board_range(board = "o", page_start = 1, page_stop = 2, latest_comments = TRUE)
 }
 }

@@ -248,6 +248,6 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     }
   }else{
     Sys.sleep(cool)
-    c("total_found" = parsed$meta$total_found, "actual_query_result" = ifelse(as.numeric(parsed$meta$max_results) <= parsed$meta$total_found, parsed$meta$total_found, as.numeric(parsed$meta$max_results)))
+    c("total_found" = parsed$meta$total_found, "actual_query_result" = ifelse(as.numeric(parsed$meta$max_results) <= parsed$meta$total_found, as.numeric(parsed$meta$max_results), parsed$meta$total_found))
   }
 }

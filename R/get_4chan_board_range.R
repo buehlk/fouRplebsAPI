@@ -27,7 +27,7 @@
 #' \dontrun{
 #' get_4chan_board_range(board = "o", page_start = 1, page_stop = 2)
 #'
-#' get_4chan_board_range(board = "0", page_start = 1, page_stop = 2, last_comments = TRUE)
+#' get_4chan_board_range(board = "o", page_start = 1, page_stop = 2, latest_comments = TRUE)
 #' }
 #' @rdname get_4chan_board_range
 #' @export

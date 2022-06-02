@@ -4,7 +4,7 @@
 \alias{get_4chan_board_index}
 \title{Return threads for specific 4chan board index}
 \usage{
-get_4chan_board_index(board, page, latest_comments = F, cool = 0)
+get_4chan_board_index(board, page, latest_comments = TRUE, cool = 0)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
@@ -12,7 +12,7 @@ Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", 
 
 \item{page}{Integer of the board page index}
 
-\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE}
+\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE}
 
 \item{cool}{Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0}
 }

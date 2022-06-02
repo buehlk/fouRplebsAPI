@@ -9,39 +9,125 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of fouRplebsAPI is to …
+The R package fouRplebsAPI enables researchers to query the 4chan
+database archived by [4plebs.org](https://www.4plebs.org/). This
+database is the largest ongoing archive of the ever-disappearing posts
+on the imageboard 4chan. With this package researchers can use the
+detailed search functionalities offered by 4plebs and retrieve
+structured data of the communication on 4chan.
+
+The package is based on [4plebs API
+documentation](https://4plebs.tech/foolfuuka/).
+
+The 4chan boards currently covered by 4plebs are:
+
+| Board.name            | Abbreviation |
+|:----------------------|:-------------|
+| Politically Incorrect | pol          |
+| High Resolution       | hr           |
+| Traditional Games     | tg           |
+| Television & Film     | tv           |
+| Paranormal            | x            |
+| Sh\*t 4chan Says      | s4s          |
+| Auto                  | o            |
+| Advice                | adv          |
+| Travel                | trv          |
+| Flash                 | f            |
+| Sports                | sp           |
+| My Little Politics    | mlpol        |
+| Mecha & Auto          | mo           |
 
 ## Installation
 
-You can install the development version of fouRplebsAPI from
-[GitHub](https://github.com/) with:
+You can install the fouRplebsAPI from GitHub with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("buehlk/fouRplebsAPI")
 ```
 
-## Example
+## Search the 4chan archive
 
-This is a basic example which shows you how to solve a common problem:
+While this package includes several funtions that allow researchers to
+query and inspect specific 4chan posts (get_4chan_post) or threads
+(get_4chan_thread), researchers wanting to collect data from the 4plebs
+archive will probably be interested in collecting a larger amount of
+data.
+
+The *first* way of collecting data is by collecting the latest threads
+in a given board. Let’s say you are interested in the 20 latest threads
+from the “Advice” board (excluding the comments accompanying the opening
+post), one way of querying the data is:
 
 ``` r
-# library(fouRplebsAPI)
-## basic example code
+library(fouRplebsAPI)
+
+recentAdv <- get_4chan_board_range(board = "adv", page_start = 1, page_stop = 2, latest_comments = FALSE)
+
+str(recentAdv, vec.len = 1, nchar.max = 60)
+#> 'data.frame':    20 obs. of  15 variables:
+#>  $ thread_id          : chr  "26598433" ...
+#>  $ doc_id             : chr  "12901121" ...
+#>  $ num                : chr  "26598433" ...
+#>  $ subnum             : chr  "0" ...
+#>  $ op                 : num  1 1 ...
+#>  $ timestamp          : int  1654180841 1654180758 ...
+#>  $ fourchan_date      : chr  "6/2/22(Thu)10:40" ...
+#>  $ name               : chr  "Anonymous" ...
+#>  $ title              : logi  NA ...
+#>  $ referencing_comment: logi  NA ...
+#>  $ comments           : chr  "I almost broke a date with my chick and her"| __truncated__ ...
+#>  $ poster_country     : logi  NA ...
+#>  $ nreplies           : logi  NA ...
+#>  $ formatted          : logi  FALSE ...
+#>  $ media_link         : logi  NA ...
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The output description can be found in the function documentations.
+Theoretically it would be possible to scrape vast ranges of the archive
+with this function, even though the API has an API rate limit, which
+slows down the querying process.
+
+A *second* way collecting 4chan data with this package is the search
+function. 4plebs allows for a very detailed search with many search
+filter. I will show only simple examples of the data that can be
+collected with fouRplebsAPI.
+
+The example I show here is rather cheerful, because I would like to
+avoid the more controversial topics for which 4chan, especially the
+/pol/ board is notorious. Researchers, for instance the ones interested
+in the political communication of actors with contentious ideologies,
+will find it easy to adapt this example. But this one is about vacation.
+
+Let’s find the communication in the “Travel” board that discusses
+Mallorca, Spain.
+
+First, to get a first impression of the search results, one can inspect
+a snippet of the 25 most recent posts containing the search term
+“mallorca”.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+mallorca_snippet <- search_4chan_snippet(boards = "trv", start_date = "2021-01-01", end_date = "2022-12-31", text = "mallorca")
+#> The 1 - 25 oldest threads of the 77 total search results are shown.
+#> Scraping all 77 results would take ~ 1.33 minutes.
+
+str(recentAdv, vec.len = 1, nchar.max = 60)
+#> 'data.frame':    20 obs. of  15 variables:
+#>  $ thread_id          : chr  "26598433" ...
+#>  $ doc_id             : chr  "12901121" ...
+#>  $ num                : chr  "26598433" ...
+#>  $ subnum             : chr  "0" ...
+#>  $ op                 : num  1 1 ...
+#>  $ timestamp          : int  1654180841 1654180758 ...
+#>  $ fourchan_date      : chr  "6/2/22(Thu)10:40" ...
+#>  $ name               : chr  "Anonymous" ...
+#>  $ title              : logi  NA ...
+#>  $ referencing_comment: logi  NA ...
+#>  $ comments           : chr  "I almost broke a date with my chick and her"| __truncated__ ...
+#>  $ poster_country     : logi  NA ...
+#>  $ nreplies           : logi  NA ...
+#>  $ formatted          : logi  FALSE ...
+#>  $ media_link         : logi  NA ...
 ```
 
 You’ll still need to render `README.Rmd` regularly, to keep `README.md`

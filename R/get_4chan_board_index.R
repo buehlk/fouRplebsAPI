@@ -3,7 +3,7 @@
 #' @param board Character variable of the 4chan board.\cr
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
 #' @param page Integer of the board page index
-#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: FALSE
+#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE
 #' @param cool Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0
 #' @return Dataframe with details on all posts on a given board page.
 #' @details Variables in API output:\cr\cr
@@ -41,7 +41,7 @@
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
 
-get_4chan_board_index <- function(board, page, latest_comments = FALSE, cool = 0) {
+get_4chan_board_index <- function(board, page, latest_comments = TRUE, cool = 0) {
 
   match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo"))
 
