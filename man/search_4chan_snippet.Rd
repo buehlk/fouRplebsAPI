@@ -76,25 +76,25 @@ Dataframe with details on the most recent/oldest posts found.
 This function returns latest or oldest 4chan posts specified by searchterms
 }
 \details{
-Variables in API output:
-thread_id: 4chan ID of the thread the post is situated in
-doc_id: 4chan document ID
-num: 4chan post ID
-subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post
-op: Binary, 1: Opening Post, 0: Reply Post
-timestamp: Time sent in Posix time
-fourchan_date: Time sent
-name: Author name
-title: Post title
-referencing_comment: The post_id this post is quoting
-comments: Text of the post
-poster_country: Author country
+Variables in API output:\cr\cr
+thread_id: 4chan ID of the thread the post is situated in\cr
+doc_id: 4chan document ID\cr
+num: 4chan post ID\cr
+subnum: Binary, 1: Ghost Post, 0: Non-Ghost Post\cr
+op: Binary, 1: Opening Post, 0: Reply Post\cr
+timestamp: Time sent in Posix time\cr
+fourchan_date: Time sent\cr
+name: Author name\cr
+title: Post title\cr
+referencing_comment: The post_id this post is quoting\cr
+comments: Text of the post\cr
+poster_country: Author country\cr
 nreplies: Number of replies
-formatted: Boolean, Has this post been formatted?
-media_link: Download link to the media (e.g. images) that have been shared in the post
+formatted: Boolean, Has this post been formatted?\cr
+media_link: Download link to the media (e.g. images) that have been shared in the post\cr\cr
 
-If result_type is "results_num":
-total_found: All number of total posts found with this query
+If result_type is "results_num":\cr
+total_found: All number of total posts found with this query\cr
 actual_query_result: The 4plebs API limits the search results shown. This limit is 100,000 results. If the number of total posts found exceeds this limit, the actual_query_results are capped.
 }
 \examples{
