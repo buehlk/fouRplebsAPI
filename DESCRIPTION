@@ -12,3 +12,4 @@ LazyData: true
 URL: https://github.com/buehlk/fouRplebsAPI
 BugReports: https://github.com/buehlk/fouRplebsAPI/issues
 Imports: httr, jsonlite, purrr, stringr, dplyr
+RoxygenNote: 7.2.0
