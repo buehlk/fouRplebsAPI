@@ -84,7 +84,7 @@ get_4chan_board_index <- function(board, page, latest_comments = F, cool = 0) {
                                  "media_link" = character()),
                             class = "data.frame")
 
-  for(i in seq_len(0)){
+  for(i in seq_len(length(parsed))){
 
     comments <- parsed[[i]][["posts"]] %>%
       purrr::map("comment") %>%
