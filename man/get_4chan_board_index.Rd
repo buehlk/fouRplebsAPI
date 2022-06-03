@@ -55,7 +55,8 @@ get_4chan_board_index(board = "mo", page = 1, latest_comments = FALSE)
 }
 \seealso{
 \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
- \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+ \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+ \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
  \code{\link[stringr]{str_extract}}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_4chan_post.R
 \name{get_4chan_post}
 \alias{get_4chan_post}
-\title{Get specific 4chan post}
+\title{Return specific 4chan post}
 \usage{
 get_4chan_post(board, post_id)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_4chan_thread.R
 \name{get_4chan_thread}
 \alias{get_4chan_thread}
-\title{Get specific 4chan thread}
+\title{Return specific 4chan thread}
 \usage{
 get_4chan_thread(board, thread_id)
 }
