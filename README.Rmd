@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # fouRplebsAPI
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental) 
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
 <!-- badges: end -->
 
 The R package fouRplebsAPI enables researchers to query the 4chan database archived by [4plebs.org](https://www.4plebs.org/). 
@@ -72,7 +72,7 @@ First, to get a first impression of the search results, one can inspect a snippe
 ```{r example2}
 mallorca_snippet <- search_4chan_snippet(boards = "trv", start_date = "2021-01-01", end_date = "2022-12-31", text = "mallorca")
 
-str(recentAdv, vec.len = 1, nchar.max = 60)
+str(mallorca_snippet, vec.len = 1, nchar.max = 60)
 ```
 Note that the function search_4chan_snippet() also prints the total number of search results and the estimated time to retrieve them with search_4chan(). This estimation is based on 5 requests per minute API limit.
 
