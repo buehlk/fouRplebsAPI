@@ -78,6 +78,7 @@
 #' @rdname search_4chan_snippet
 #' @export
 #' @importFrom httr modify_url user_agent GET http_type content http_error
+#' status_code
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
@@ -139,7 +140,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                                simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
-    statuscode <- httr:status_code(resp)
+    statuscode <- httr::status_code(resp)
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",
@@ -153,7 +154,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
   if(result_type == "snippet"){
     comments <- parsed[[1]][["posts"]] %>%
       purrr::map("comment") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     comments[which(comments == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -180,13 +181,13 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
     media_link <- parsed[[1]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     media_link[which(media_link == FALSE)] <-  parsed[[1]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      unlist(lapply(., is.null))
+      unlist(lapply(is.null))
     media_link[which(media_link == TRUE)] <- NA
 
     timestamp <- parsed[[1]][["posts"]] %>%
@@ -217,7 +218,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
 
     nreplies <- parsed[[1]][["posts"]] %>%
       purrr::map("nreplies") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     nreplies[which(nreplies == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -228,7 +229,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
 
     poster_country <- parsed[[1]][["posts"]] %>%
       purrr::map("poster_country") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     poster_country[which(poster_country == FALSE)] <-
@@ -240,7 +241,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
 
     title <- parsed[[1]][["posts"]] %>%
       purrr::map("title") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     title[which(title == FALSE)] <-  parsed[[1]][["posts"]] %>%

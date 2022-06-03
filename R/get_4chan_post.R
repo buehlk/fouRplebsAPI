@@ -38,6 +38,7 @@
 #' @rdname get_4chan_post
 #' @export
 #' @importFrom httr modify_url user_agent GET http_type content http_error
+#' status_code
 #' @importFrom jsonlite fromJSON
 #' @importFrom stringr str_extract
 
@@ -58,7 +59,7 @@ get_4chan_post <- function(board, post_id) {
                                simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
-    statuscode <- httr:status_code(resp)
+    statuscode <- httr::status_code(resp)
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",

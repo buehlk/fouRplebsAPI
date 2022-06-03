@@ -36,13 +36,15 @@
 #' }
 #' @seealso
 #'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+#'  \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
 #'  \code{\link[jsonlite]{toJSON, fromJSON}}
 #'  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
 #'  \code{\link[stringr]{str_extract}}
 #' @rdname get_4chan_board_index
 #' @export
 #' @importFrom httr modify_url user_agent GET http_type content http_error
+#' status_code
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
@@ -67,10 +69,11 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
                                simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
+    statuscode <- httr::status_code(resp)
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",
-        httr:status_code(resp),
+        statuscode,
         parsed$error
       ),
       call. = FALSE
@@ -99,7 +102,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     comments <- parsed[[i]][["posts"]] %>%
       purrr::map("comment") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     comments[which(comments == FALSE)] <-  parsed[[i]][["posts"]] %>%
@@ -126,14 +129,14 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
     media_link <- parsed[[i]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
-    media_link[which(media_link == F)] <-  parsed[[i]][["posts"]] %>%
+    media_link[which(media_link == FALSE)] <-  parsed[[i]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      unlist(lapply(., is.null))
-    media_link[which(media_link == T)] <- NA
+      unlist(lapply(is.null))
+    media_link[which(media_link == TRUE)] <- NA
 
     timestamp <- parsed[[i]][["posts"]] %>%
       purrr::map("timestamp") %>%
@@ -163,7 +166,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     nreplies <- parsed[[i]][["posts"]] %>%
       purrr::map("nreplies") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     nreplies[which(nreplies == FALSE)] <-  parsed[[i]][["posts"]] %>%
@@ -174,10 +177,11 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     poster_country <- parsed[[i]][["posts"]] %>%
       purrr::map("poster_country") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
-    poster_country[which(poster_country == FALSE)] <-  parsed[[i]][["posts"]] %>%
+    poster_country[which(poster_country == FALSE)] <-
+      parsed[[i]][["posts"]] %>%
       purrr::map("poster_country") %>%
       unlist() %>%
       unname()
@@ -185,7 +189,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     title <- parsed[[i]][["posts"]] %>%
       purrr::map("title") %>%
-      lapply(., is.null) %>%
+      lapply(is.null) %>%
       unlist() %>%
       unname()
     title[which(title == FALSE)] <-  parsed[[i]][["posts"]] %>%
@@ -195,8 +199,11 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
     title[which(title == TRUE)] <- NA
 
     referencing_comment <- rep(NA, length(comments))
-    referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments,
-                                                                 ">>[0-9]*( |\\n)"))
+    referencing_comment <- gsub(">>| ",
+                                "",
+                                stringr::str_extract(comments,
+                                                     ">>[0-9]*( |\\n)")
+                                )
 
     comments <- gsub(">>[0-9]*( |\\n)", "", comments)
 

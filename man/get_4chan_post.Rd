@@ -8,7 +8,8 @@ get_4chan_post(board, post_id)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{post_id}{Integer value of the post ID.}
 }
@@ -34,7 +35,8 @@ comments: Text of the post\cr
 poster_country: Author country\cr
 nreplies: Number of replies
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post
+media_link: Download link to the media (e.g. images) that have been shared
+in the post
 }
 \examples{
 \dontrun{
@@ -44,7 +46,9 @@ get_4chan_post(board = "trv", post = 2226503)
 }
 }
 \seealso{
-\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+ \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+ \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
  \code{\link[stringr]{str_extract}}
 }

@@ -38,6 +38,7 @@
 #' @rdname get_4chan_thread
 #' @export
 #' @importFrom httr modify_url user_agent GET http_type content http_error
+#' status_code
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
@@ -58,7 +59,7 @@ get_4chan_thread <- function(board, thread_id) {
                                simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
-    statuscode <- httr:status_code(resp)
+    statuscode <- httr::status_code(resp)
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",
@@ -93,13 +94,13 @@ get_4chan_thread <- function(board, thread_id) {
   media_link <- parsed[[1]][["posts"]] %>%
     purrr::map2("doc_id", "media") %>%
     purrr::map("media_link") %>%
-    lapply(., is.null) %>%
+    lapply(is.null) %>%
     unlist() %>%
     unname()
   media_link[which(media_link == FALSE)] <-  parsed[[1]][["posts"]] %>%
     purrr::map2("doc_id", "media") %>%
     purrr::map("media_link") %>%
-    unlist(lapply(., is.null))
+    unlist(lapply(is.null))
   media_link[which(media_link == TRUE)] <- NA
 
   timestamp <- parsed[[1]][["posts"]] %>%
@@ -130,7 +131,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   nreplies <- parsed[[1]][["posts"]] %>%
     purrr::map("nreplies") %>%
-    lapply(., is.null) %>%
+    lapply(is.null) %>%
     unlist() %>%
     unname()
   nreplies[which(nreplies == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -141,7 +142,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   poster_country <- parsed[[1]][["posts"]] %>%
     purrr::map("poster_country") %>%
-    lapply(., is.null) %>%
+    lapply(is.null) %>%
     unlist() %>%
     unname()
   poster_country[which(poster_country == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -152,7 +153,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   title <- parsed[[1]][["posts"]] %>%
     purrr::map("title") %>%
-    lapply(., is.null) %>%
+    lapply(is.null) %>%
     unlist() %>%
     unname()
   title[which(title == FALSE)] <-  parsed[[1]][["posts"]] %>%
