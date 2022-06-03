@@ -49,8 +49,8 @@
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
-#' @importFrom rlang .data
-utils::globalVariables(".")
+#' @autoglobal
+
 get_4chan_board_index <- function(board, page, latest_comments = TRUE,
                                   cool = 0) {
 

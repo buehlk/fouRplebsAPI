@@ -83,8 +83,8 @@
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
-#' @importFrom rlang .data
-utils::globalVariables(".")
+#' @autoglobal
+
 search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                                  text = "", subject = "", filename = "",
                                  ghost = "all", user_id = "", tripcode = "",
@@ -93,6 +93,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                                  deleted = "all", capcode = "all",
                                  order = "asc", cool = 0, page = 1,
                                  result_type = "snippet") {
+
 
   filter <- NA
   if(show_only == "text"){

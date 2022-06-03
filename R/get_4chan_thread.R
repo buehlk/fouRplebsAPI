@@ -43,8 +43,8 @@
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
-#' @importFrom rlang .data
-utils::globalVariables(".")
+#' @autoglobal
+
 get_4chan_thread <- function(board, thread_id) {
   match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o",
                      "trv", "f", "sp", "mlpol", "mo"))
