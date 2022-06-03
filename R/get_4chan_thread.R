@@ -43,7 +43,8 @@
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
-
+#' @importFrom rlang .data
+utils::globalVariables(".")
 get_4chan_thread <- function(board, thread_id) {
   match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o",
                      "trv", "f", "sp", "mlpol", "mo"))
@@ -94,13 +95,13 @@ get_4chan_thread <- function(board, thread_id) {
   media_link <- parsed[[1]][["posts"]] %>%
     purrr::map2("doc_id", "media") %>%
     purrr::map("media_link") %>%
-    lapply(is.null) %>%
+    lapply(., is.null) %>%
     unlist() %>%
     unname()
   media_link[which(media_link == FALSE)] <-  parsed[[1]][["posts"]] %>%
     purrr::map2("doc_id", "media") %>%
     purrr::map("media_link") %>%
-    unlist(lapply(is.null))
+    unlist(lapply(., is.null))
   media_link[which(media_link == TRUE)] <- NA
 
   timestamp <- parsed[[1]][["posts"]] %>%
@@ -131,7 +132,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   nreplies <- parsed[[1]][["posts"]] %>%
     purrr::map("nreplies") %>%
-    lapply(is.null) %>%
+    lapply(., is.null) %>%
     unlist() %>%
     unname()
   nreplies[which(nreplies == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -142,7 +143,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   poster_country <- parsed[[1]][["posts"]] %>%
     purrr::map("poster_country") %>%
-    lapply(is.null) %>%
+    lapply(., is.null) %>%
     unlist() %>%
     unname()
   poster_country[which(poster_country == FALSE)] <-  parsed[[1]][["posts"]] %>%
@@ -153,7 +154,7 @@ get_4chan_thread <- function(board, thread_id) {
 
   title <- parsed[[1]][["posts"]] %>%
     purrr::map("title") %>%
-    lapply(is.null) %>%
+    lapply(., is.null) %>%
     unlist() %>%
     unname()
   title[which(title == FALSE)] <-  parsed[[1]][["posts"]] %>%

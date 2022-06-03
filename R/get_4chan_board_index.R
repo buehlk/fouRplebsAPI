@@ -49,7 +49,8 @@
 #' @importFrom purrr map map2
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
-
+#' @importFrom rlang .data
+utils::globalVariables(".")
 get_4chan_board_index <- function(board, page, latest_comments = TRUE,
                                   cool = 0) {
 
@@ -102,7 +103,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     comments <- parsed[[i]][["posts"]] %>%
       purrr::map("comment") %>%
-      lapply(is.null) %>%
+      lapply(., is.null) %>%
       unlist() %>%
       unname()
     comments[which(comments == FALSE)] <-  parsed[[i]][["posts"]] %>%
@@ -129,13 +130,13 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
     media_link <- parsed[[i]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      lapply(is.null) %>%
+      lapply(., is.null) %>%
       unlist() %>%
       unname()
     media_link[which(media_link == FALSE)] <-  parsed[[i]][["posts"]] %>%
       purrr::map2("doc_id", "media") %>%
       purrr::map("media_link") %>%
-      unlist(lapply(is.null))
+      unlist(lapply(., is.null))
     media_link[which(media_link == TRUE)] <- NA
 
     timestamp <- parsed[[i]][["posts"]] %>%
@@ -166,7 +167,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     nreplies <- parsed[[i]][["posts"]] %>%
       purrr::map("nreplies") %>%
-      lapply(is.null) %>%
+      lapply(., is.null) %>%
       unlist() %>%
       unname()
     nreplies[which(nreplies == FALSE)] <-  parsed[[i]][["posts"]] %>%
@@ -177,7 +178,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     poster_country <- parsed[[i]][["posts"]] %>%
       purrr::map("poster_country") %>%
-      lapply(is.null) %>%
+      lapply(., is.null) %>%
       unlist() %>%
       unname()
     poster_country[which(poster_country == FALSE)] <-
@@ -189,7 +190,7 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE,
 
     title <- parsed[[i]][["posts"]] %>%
       purrr::map("title") %>%
-      lapply(is.null) %>%
+      lapply(., is.null) %>%
       unlist() %>%
       unname()
     title[which(title == FALSE)] <-  parsed[[i]][["posts"]] %>%
