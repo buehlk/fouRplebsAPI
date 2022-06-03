@@ -1,7 +1,8 @@
 #' @title Get specific 4chan thread
 #' @description Return 4chan thread by looking up its ID
 #' @param board Character variable of the 4chan board.\cr
-#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
+#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+#' "o", "trv", "f", "sp", "mlpol", "mo".
 #' @param thread_id Dataframe with details of all posts in the thread.
 #' @return Dataframe with details on all posts in the thread.
 #' @details Variables in API output:\cr\cr
@@ -19,7 +20,8 @@
 #' poster_country: Author country\cr
 #' nreplies: Number of replies\cr
 #' formatted: Boolean, Has this post been formatted?\cr
-#' media_link: Download link to the media (e.g. images) that have been shared in the post
+#' media_link: Download link to the media (e.g. images) that have been shared in
+#'  the post
 #' @examples
 #' \dontrun{
 #' get_4chan_thread(board = "adv", thread_id = 21738271)
@@ -27,7 +29,9 @@
 #' get_4chan_thread(board = "trv", thread_id = 1888747)
 #' }
 #' @seealso
-#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+#'  \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
 #'  \code{\link[jsonlite]{toJSON, fromJSON}}
 #'  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
 #'  \code{\link[stringr]{str_extract}}
@@ -40,7 +44,8 @@
 #' @importFrom dplyr %>%
 
 get_4chan_thread <- function(board, thread_id) {
-  match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo"))
+  match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o",
+                     "trv", "f", "sp", "mlpol", "mo"))
   path <- sprintf("_/api/chan/thread/?board=%s&num=%i", board, thread_id)
   url <- httr::modify_url("http://archive.4plebs.org/", path = path)
   ua <- httr::user_agent("4Rplebs API")
@@ -49,7 +54,8 @@ get_4chan_thread <- function(board, thread_id) {
     stop("API did not return json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
+  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
+                               simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == F) {
     stop(
@@ -155,7 +161,8 @@ get_4chan_thread <- function(board, thread_id) {
   title[which(title == T)] <- NA
 
   referencing_comment <- rep(NA, length(comments))
-  referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments, ">>[0-9]*( |\\n)"))
+  referencing_comment <- gsub(">>| ", "",
+                              stringr::str_extract(comments, ">>[0-9]*( |\\n)"))
 
   comments <- gsub(">>[0-9]*( |\\n)", "", comments)
 
@@ -168,13 +175,18 @@ get_4chan_thread <- function(board, thread_id) {
                "timestamp" = parsed[[1]][["op"]]$timestamp,
                "fourchan_date" = parsed[[1]][["op"]]$fourchan_date,
                "name" = parsed[[1]][["op"]]$name,
-               "title" = ifelse(is.null(parsed$title), NA, parsed[[1]][["op"]]$media$title),
+               "title" = ifelse(is.null(parsed$title), NA,
+                                parsed[[1]][["op"]]$media$title),
                "referencing_comment" = NA,
                "comments" = parsed[[1]][["op"]]$comment,
-               "poster_country" = ifelse(is.null(parsed[[1]][["op"]]$poster_country), NA, parsed[[1]][["op"]]$poster_country),
-               "nreplies" = ifelse(is.null(parsed[[1]][["op"]]$nreplies), NA, parsed[[1]][["op"]]$nreplies),
+               "poster_country" =
+                 ifelse(is.null(parsed[[1]][["op"]]$poster_country), NA,
+                        parsed[[1]][["op"]]$poster_country),
+               "nreplies" = ifelse(is.null(parsed[[1]][["op"]]$nreplies),
+                                   NA, parsed[[1]][["op"]]$nreplies),
                "formatted" = parsed[[1]][["op"]]$formatted,
-               "media_link" = ifelse(is.null(parsed$media), NA, parsed[[1]][["op"]]$media$media_link)
+               "media_link" = ifelse(is.null(parsed$media), NA,
+                                     parsed[[1]][["op"]]$media$media_link)
     ),
     data.frame("thread_id" = thread_id,
                "doc_id" = doc_id,

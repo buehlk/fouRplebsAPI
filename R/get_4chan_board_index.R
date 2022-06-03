@@ -1,10 +1,15 @@
 #' @title Return threads for specific 4chan board index
-#' @description This function returns all 10 threads from a given board page index, starting from the latest thread
+#' @description This function returns all 10 threads from a given board page
+#' index, starting from the latest thread
 #' @param board Character variable of the 4chan board.\cr
-#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
+#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+#' "o", "trv", "f", "sp", "mlpol", "mo".
 #' @param page Integer of the board page index
-#' @param latest_comments Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE
-#' @param cool Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0
+#' @param latest_comments Boolean, TRUE: Return opening posts and all replies,
+#' FALSE: Return only opening posts, Default: TRUE
+#' @param cool Integer (seconds), The 4plebs API includes an undocumented API
+#' rate limit for the board index search. For multiple searches a cool-down is
+#' recommended , Default: 0
 #' @return Dataframe with details on all posts on a given board page.
 #' @details Variables in API output:\cr\cr
 #' thread_id: 4chan ID of the thread the post is situated in\cr
@@ -21,7 +26,8 @@
 #' poster_country: Author country\cr
 #' nreplies: Number of replies\cr
 #' formatted: Boolean, Has this post been formatted?\cr
-#' media_link: Download link to the media (e.g. images) that have been shared in the post
+#' media_link: Download link to the media (e.g. images) that have been shared
+#' in the post
 #' @examples
 #' \dontrun{
 #' get_4chan_board_index(board = "mo", page = 1, latest_comments = TRUE)
@@ -29,7 +35,8 @@
 #' get_4chan_board_index(board = "mo", page = 1, latest_comments = FALSE)
 #' }
 #' @seealso
-#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
 #'  \code{\link[jsonlite]{toJSON, fromJSON}}
 #'  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
 #'  \code{\link[stringr]{str_extract}}
@@ -41,11 +48,14 @@
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
 
-get_4chan_board_index <- function(board, page, latest_comments = TRUE, cool = 0) {
+get_4chan_board_index <- function(board, page, latest_comments = TRUE,
+                                  cool = 0) {
 
-  match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo"))
+  match.arg(board, c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o",
+                     "trv", "f", "sp", "mlpol", "mo"))
 
-  path <- sprintf("_/api/chan/index/?board=%s&page=%i&order=by_thread", board, page)
+  path <- sprintf("_/api/chan/index/?board=%s&page=%i&order=by_thread", board,
+                  page)
   url <- httr::modify_url("http://archive.4plebs.org/", path = path)
   ua <- httr::user_agent("4Rplebs API")
   resp <- httr::GET(url, ua)
@@ -53,7 +63,8 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE, cool = 0)
     stop("API did not return json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
+  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
+                               simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
     stop(
@@ -184,7 +195,8 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE, cool = 0)
     title[which(title == TRUE)] <- NA
 
     referencing_comment <- rep(NA, length(comments))
-    referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments, ">>[0-9]*( |\\n)"))
+    referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments,
+                                                                 ">>[0-9]*( |\\n)"))
 
     comments <- gsub(">>[0-9]*( |\\n)", "", comments)
 
@@ -193,60 +205,79 @@ get_4chan_board_index <- function(board, page, latest_comments = TRUE, cool = 0)
       unlist() %>%
       unname()
     if(latest_comments){
-      query_result <- rbind(query_result,
-                            rbind(
-                              data.frame("thread_id" = parsed[[i]][["op"]]$thread_num,
-                                         "doc_id" = parsed[[i]][["op"]]$doc_id,
-                                         "num" = parsed[[i]][["op"]]$num,
-                                         "subnum" = parsed[[i]][["op"]]$subnum,
-                                         "op" = as.numeric(parsed[[i]][["op"]]$op),
-                                         "timestamp" = parsed[[i]][["op"]]$timestamp,
-                                         "fourchan_date" = parsed[[i]][["op"]]$fourchan_date,
-                                         "name" = parsed[[i]][["op"]]$name,
-                                         "title" = ifelse(is.null(parsed$title), NA, parsed[[i]][["op"]]$media$title),
-                                         "referencing_comment" = NA,
-                                         "comments" = ifelse(is.null(parsed[[i]][["op"]]$comment), NA, parsed[[i]][["op"]]$comment),
-                                         "poster_country" = ifelse(is.null(parsed[[i]][["op"]]$poster_country), NA, parsed[[i]][["op"]]$poster_country),
-                                         "nreplies" = ifelse(is.null(parsed[[i]][["op"]]$nreplies), NA, parsed[[i]][["op"]]$nreplies),
-                                         "formatted" = parsed[[i]][["op"]]$formatted,
-                                         "media_link" = ifelse(is.null(parsed$media), NA, parsed[[i]][["op"]]$media$media_link)
+      query_result <-
+        rbind(query_result,
+              rbind(
+                data.frame("thread_id" =
+                             parsed[[i]][["op"]]$thread_num,
+                           "doc_id" = parsed[[i]][["op"]]$doc_id,
+                           "num" = parsed[[i]][["op"]]$num,
+                           "subnum" = parsed[[i]][["op"]]$subnum,
+                           "op" = as.numeric(parsed[[i]][["op"]]$op),
+                           "timestamp" = parsed[[i]][["op"]]$timestamp,
+                           "title" = ifelse(is.null(parsed$title), NA,
+                                            parsed[[i]][["op"]]$media$title),
+                           "referencing_comment" = NA,
+                           "comments" = ifelse(is.null(
+                             parsed[[i]][["op"]]$comment), NA,
+                             parsed[[i]][["op"]]$comment),
+                           "poster_country" = ifelse(
+                             is.null(parsed[[i]][["op"]]$poster_country), NA,
+                             parsed[[i]][["op"]]$poster_country),
+                           "nreplies" = ifelse(
+                             is.null(parsed[[i]][["op"]]$nreplies), NA,
+                             parsed[[i]][["op"]]$nreplies),
+                           "formatted" = parsed[[i]][["op"]]$formatted,
+                           "media_link" = ifelse(
+                             is.null(parsed$media), NA,
+                             parsed[[i]][["op"]]$media$media_link)
                               ),
-                              data.frame("thread_id" = thread_id,
-                                         "doc_id" = doc_id,
-                                         "num" = num,
-                                         "subnum" = subnum,
-                                         "op" = op,
-                                         "timestamp" = timestamp,
-                                         "fourchan_date" = fourchan_date,
-                                         "name" = name,
-                                         "title" = title,
-                                         "referencing_comment" = referencing_comment,
-                                         "comments" = comments,
-                                         "poster_country" = poster_country,
-                                         "nreplies" = nreplies,
-                                         "formatted" = formatted,
-                                         "media_link" = media_link
-                              )
-                            )
-      )
+                data.frame("thread_id" = thread_id,
+                           "doc_id" = doc_id,
+                           "num" = num,
+                           "subnum" = subnum,
+                           "op" = op,
+                           "timestamp" = timestamp,
+                           "fourchan_date" = fourchan_date,
+                           "name" = name,
+                           "title" = title,
+                           "referencing_comment" = referencing_comment,
+                           "comments" = comments,
+                           "poster_country" = poster_country,
+                           "nreplies" = nreplies,
+                           "formatted" = formatted,
+                           "media_link" = media_link
+                           )
+                )
+              )
     }else{
-      query_result <- rbind(query_result,
-                            data.frame("thread_id" = parsed[[i]][["op"]]$thread_num,
-                                       "doc_id" = parsed[[i]][["op"]]$doc_id,
-                                       "num" = parsed[[i]][["op"]]$num,
-                                       "subnum" = parsed[[i]][["op"]]$subnum,
-                                       "op" = as.numeric(parsed[[i]][["op"]]$op),
-                                       "timestamp" = parsed[[i]][["op"]]$timestamp,
-                                       "fourchan_date" = parsed[[i]][["op"]]$fourchan_date,
-                                       "name" = parsed[[i]][["op"]]$name,
-                                       "title" = ifelse(is.null(parsed$title), NA, parsed[[i]][["op"]]$media$title),
-                                       "referencing_comment" = NA,
-                                       "comments" = ifelse(is.null(parsed[[i]][["op"]]$comment), NA, parsed[[i]][["op"]]$comment),
-                                       "poster_country" = ifelse(is.null(parsed[[i]][["op"]]$poster_country), NA, parsed[[i]][["op"]]$poster_country),
-                                       "nreplies" = ifelse(is.null(parsed[[i]][["op"]]$nreplies), NA, parsed[[i]][["op"]]$nreplies),
-                                       "formatted" = parsed[[i]][["op"]]$formatted,
-                                       "media_link" = ifelse(is.null(parsed$media), NA, parsed[[i]][["op"]]$media$media_link)
-                            )
+      query_result <-
+        rbind(query_result,
+              data.frame("thread_id" = parsed[[i]][["op"]]$thread_num,
+                         "doc_id" = parsed[[i]][["op"]]$doc_id,
+                         "num" = parsed[[i]][["op"]]$num,
+                         "subnum" = parsed[[i]][["op"]]$subnum,
+                         "op" = as.numeric(parsed[[i]][["op"]]$op),
+                         "timestamp" = parsed[[i]][["op"]]$timestamp,
+                         "fourchan_date" = parsed[[i]][["op"]]$fourchan_date,
+                         "name" = parsed[[i]][["op"]]$name,
+                         "title" = ifelse(is.null(parsed$title), NA,
+                                          parsed[[i]][["op"]]$media$title),
+                         "referencing_comment" = NA,
+                         "comments" = ifelse(is.null(
+                           parsed[[i]][["op"]]$comment), NA,
+                           parsed[[i]][["op"]]$comment),
+                         "poster_country" = ifelse(is.null(
+                           parsed[[i]][["op"]]$poster_country), NA,
+                           parsed[[i]][["op"]]$poster_country),
+                         "nreplies" = ifelse(is.null(
+                           parsed[[i]][["op"]]$nreplies), NA,
+                           parsed[[i]][["op"]]$nreplies),
+                         "formatted" = parsed[[i]][["op"]]$formatted,
+                         "media_link" = ifelse(is.null(
+                           parsed$media), NA,
+                           parsed[[i]][["op"]]$media$media_link)
+                         )
       )
 
     }

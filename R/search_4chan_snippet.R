@@ -1,26 +1,41 @@
 #' @title Seach latest or oldest 4chan posts
-#' @description This function returns latest or oldest 4chan posts specified by searchterms
-#' @param start_date String, Start date of post search. Format: "YYY-MM-DD", Default: ''
-#' @param end_date String, End date of post search. Format: "YYY-MM-DD", Default: ''
+#' @description This function returns latest or oldest 4chan posts specified by
+#' searchterms
+#' @param start_date String, Start date of post search. Format: "YYY-MM-DD",
+#' Default: ''
+#' @param end_date String, End date of post search. Format: "YYY-MM-DD",
+#' Default: ''
 #' @param boards String or string vector of the 4chan board.\cr
-#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".
+#' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+#' "o", "trv", "f", "sp", "mlpol", "mo".
 #' @param text String, Searchterms in post text. Regex possible, Default: ''
-#' @param subject String, Searchterms in post subject. Regex possible, Default: ''
+#' @param subject String, Searchterms in post subject. Regex possible,
+#' Default: ''
 #' @param filename String, Searchterms in filename. Regex possible, Default: ''
 #' @param ghost String, Filter by: "all", "only", "none" , Default: 'all'
 #' @param user_id Integer, Filter by user_id, Default: ''
 #' @param tripcode String, Filter by tripcode, Default: ''
-#' @param type String, Filter by post type: "all", "sticky", "op", "posts", Default: 'all'
+#' @param type String, Filter by post type: "all", "sticky", "op", "posts",
+#' Default: 'all'
 #' @param username String, Search username, Default: ''
-#' @param country String, Filter by country. Format: ISO 3166-1 Alpha-2 country code, Default: ''
-#' @param results String, Return post matches or the thread they are found in. Possible values: "all", "thread", Default: ''
-#' @param show_only String, Show only posts containing data types: "all", "text", "image", Default: 'all'
-#' @param deleted String, Filter deletion status: "all", "not-deleted", "deleted", Default: 'all'
-#' @param capcode String, Filter author type: "all", "user", "ver", "mod", "dev", "admin", "manager", "founder", Default: 'all'
-#' @param order String, Return posts ordered by latest or oldest: "asc", "desc", Default: 'asc'
-#' @param cool Integer (seconds), The 4plebs API includes an API rate limit of 5 requests/min for the archive search. For multiple searches a cool-down is recommended , Default: 0
+#' @param country String, Filter by country. Format: ISO 3166-1 Alpha-2
+#' country code, Default: ''
+#' @param results String, Return post matches or the thread they are found in.
+#' Possible values: "all", "thread", Default: ''
+#' @param show_only String, Show only posts containing data types: "all",
+#' "text", "image", Default: 'all'
+#' @param deleted String, Filter deletion status: "all", "not-deleted",
+#' "deleted", Default: 'all'
+#' @param capcode String, Filter author type: "all", "user", "ver", "mod",
+#' "dev", "admin", "manager", "founder", Default: 'all'
+#' @param order String, Return posts ordered by latest or oldest: "asc",
+#' "desc", Default: 'asc'
+#' @param cool Integer (seconds), The 4plebs API includes an API rate limit of
+#' 5 requests/min for the archive search. For multiple searches a cool-down is
+#' recommended , Default: 0
 #' @param page Index of search result, Default: 1
-#' @param result_type String, Return output on the post level or only the number of posts found: "snippet", "results_num", Default: 'snippet'
+#' @param result_type String, Return output on the post level or only the
+#' number of posts found: "snippet", "results_num", Default: 'snippet'
 #' @return Dataframe with details on the most recent/oldest posts found.
 #' @details Variables in API output:\cr\cr
 #' thread_id: 4chan ID of the thread the post is situated in\cr
@@ -37,19 +52,26 @@
 #' poster_country: Author country\cr
 #' nreplies: Number of replies
 #' formatted: Boolean, Has this post been formatted?\cr
-#' media_link: Download link to the media (e.g. images) that have been shared in the post\cr\cr
+#' media_link: Download link to the media (e.g. images) that have been shared
+#' in the post\cr\cr
 #'
 #' If result_type is "results_num":\cr
 #' total_found: All number of total posts found with this query\cr
-#' actual_query_result: The 4plebs API limits the search results shown. This limit is 100,000 results. If the number of total posts found exceeds this limit, the actual_query_results are capped.
+#' actual_query_result: The 4plebs API limits the search results shown. This
+#' limit is 100,000 results. If the number of total posts found exceeds this
+#' limit, the actual_query_results are capped.
 #' @examples
 #' \dontrun{
-#' t <- search_4chan_snippet(boards = "adv", text = "kitties", show_only = "image")
+#' t <- search_4chan_snippet(boards = "adv", text = "kitties",
+#' show_only = "image")
 #'
-#' search_4chan_snippet(boards = "pol", country = "BR", result_type = "results_num")
+#' search_4chan_snippet(boards = "pol", country = "BR",
+#' result_type = "results_num")
 #' }
 #' @seealso
-#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+#'  \code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+#'   \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+#'   \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
 #'  \code{\link[jsonlite]{toJSON, fromJSON}}
 #'  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
 #'  \code{\link[stringr]{str_extract}}
@@ -61,8 +83,14 @@
 #' @importFrom stringr str_extract
 #' @importFrom dplyr %>%
 
-search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = "", subject = "", filename = "", ghost = "all", user_id = "", tripcode = "", type = "all",
-                                 username = "", country = "", results = "all", show_only = "all", deleted = "all", capcode = "all", order = "asc", cool = 0, page = 1, result_type = "snippet") {
+search_4chan_snippet <- function(start_date = "", end_date = "", boards,
+                                 text = "", subject = "", filename = "",
+                                 ghost = "all", user_id = "", tripcode = "",
+                                 type = "all", username = "", country = "",
+                                 results = "all", show_only = "all",
+                                 deleted = "all", capcode = "all",
+                                 order = "asc", cool = 0, page = 1,
+                                 result_type = "snippet") {
 
   filter <- NA
   if(show_only == "text"){
@@ -74,9 +102,12 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
   if(show_only == "all"){
     filter <- "all"
   }
-  if(all(boards %in% c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo"))){
+  if(all(boards %in% c("adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+                       "o", "trv", "f", "sp", "mlpol", "mo"))){
     boards <- paste0(boards, collapse = ".")
-  }else{stop("Invalid board name(s). Please choose from:\n 'adv', 'plebs', 'hr', 'tg', 'tv', 'x', 's4s', 'pol', 'o', 'trv', 'f', 'sp', 'mlpol', 'mo'")}
+  }else{stop("Invalid board name(s). Please choose from:\n 'adv', 'plebs',
+             'hr', 'tg', 'tv', 'x', 's4s', 'pol', 'o', 'trv', 'f', 'sp',
+             'mlpol', 'mo'")}
 
   results <- ifelse(results == "all", "all", results)
   match.arg(deleted, c("all", "not-deleted", "deleted"))
@@ -85,11 +116,18 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
   match.arg(type, c("all", "sticky", "op", "posts"))
   match.arg(filter, c("image", "text", "all"))
   match.arg(results, c("all", "thread"))
-  match.arg(capcode, c("all", "user", "ver", "mod", "dev", "admin", "manager", "founder"))
+  match.arg(capcode, c("all", "user", "ver", "mod", "dev", "admin", "manager",
+                       "founder"))
   match.arg(result_type, c("snippet", "results_num"))
 
-  path <- sprintf("_/api/chan/search/?boards=%s&email=&username=%s&tripcode=%s&capcode=%s&subject=%s&text=%s&uid=%s&country=%s&filename=%s&image=&deleted=%s&ghost=%s&filter=%s&type=%s&start=%s&end=%s&results=%s&order=%s&page=%i",
-                  boards, username, tripcode, capcode, subject, text, user_id, country, filename, deleted, ghost, filter, type, start_date, end_date, results, order, page)
+  path <- sprintf(paste0("_/api/chan/search/?boards=%s&email=&username=%s",
+                         "&tripcode=%s&capcode=%s&subject=%s&text=%s&uid=%s",
+                         "&country=%s&filename=%s&image=&deleted=%s&ghost=%s",
+                         "&filter=%s&type=%s&start=%s&end=%s&results=%s&",
+                         "order=%s&page=%i"),
+                  boards, username, tripcode, capcode, subject, text, user_id,
+                  country, filename, deleted, ghost, filter, type, start_date,
+                  end_date, results, order, page)
   url <- httr::modify_url("http://archive.4plebs.org/", path = path)
   ua <- httr::user_agent("4Rplebs API")
   resp <- httr::GET(url, ua)
@@ -97,7 +135,8 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     stop("API did not return json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
+  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
+                               simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
     stop(
@@ -191,7 +230,8 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
       lapply(., is.null) %>%
       unlist() %>%
       unname()
-    poster_country[which(poster_country == FALSE)] <-  parsed[[1]][["posts"]] %>%
+    poster_country[which(poster_country == FALSE)] <-
+      parsed[[1]][["posts"]] %>%
       purrr::map("poster_country") %>%
       unlist() %>%
       unname()
@@ -209,7 +249,9 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     title[which(title == TRUE)] <- NA
 
     referencing_comment <- rep(NA, length(comments))
-    referencing_comment <- gsub(">>| ", "", stringr::str_extract(comments, ">>[0-9]*( |\\n)"))
+    referencing_comment <- gsub(">>| ", "",
+                                stringr::str_extract(comments,
+                                                     ">>[0-9]*( |\\n)"))
 
     comments <- gsub(">>[0-9]*( |\\n)", "", comments)
 
@@ -237,10 +279,35 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
 
     if(cool == 0){
       if(parsed$meta$total_found > as.numeric(parsed$meta$max_results)){
-        cat(paste("The amount of", parsed$meta$total_found,"search results found exceeds the API limit of 100000.\n"))
+        cat(paste("The amount of", parsed$meta$total_found,
+                  "search results found exceeds the API limit of 100000.\n"))
       }
-      cat(paste("The", (page-1)*25+1, "-", (page-1)*25+nrow(query_result), ifelse(order == "asc", "oldest", "newest"), ifelse(results == "", "posts", "threads"), "of the", ifelse(parsed$meta$total_found <= as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)), "total search results","are shown.\n"))
-      cat(paste("Scraping all", ifelse(parsed$meta$total_found < as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)),"results would take ~", round(ceiling(as.numeric(ifelse(parsed$meta$total_found < as.numeric(parsed$meta$max_results), parsed$meta$total_found, as.numeric(parsed$meta$max_results)))/25)*20/60, 2), "minutes."))
+      cat(paste("The", (page-1)*25+1, "-", (page-1)*25+nrow(query_result),
+                ifelse(
+                  order == "asc", "oldest", "newest"
+                  ),
+                ifelse(
+                  results == "", "posts", "threads"
+                  ),
+                "of the",
+                ifelse(
+                  parsed$meta$total_found <= as.numeric(
+                    parsed$meta$max_results
+                    ),
+                  parsed$meta$total_found, as.numeric(parsed$meta$max_results)
+                  ),
+                "total search results","are shown.\n"))
+      cat(paste("Scraping all",
+                ifelse(
+                  parsed$meta$total_found < as.numeric(parsed$meta$max_results),
+                  parsed$meta$total_found, as.numeric(parsed$meta$max_results)
+                  ),
+                "results would take ~",
+                round(ceiling(as.numeric(ifelse(
+                  parsed$meta$total_found < as.numeric(parsed$meta$max_results),
+                  parsed$meta$total_found, as.numeric(parsed$meta$max_results))
+                  )/25)*20/60, 2), "minutes.")
+          )
       query_result
     }else{
       Sys.sleep(cool)
@@ -248,6 +315,10 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards, text = 
     }
   }else{
     Sys.sleep(cool)
-    c("total_found" = parsed$meta$total_found, "actual_query_result" = ifelse(as.numeric(parsed$meta$max_results) <= parsed$meta$total_found, as.numeric(parsed$meta$max_results), parsed$meta$total_found))
+    c("total_found" = parsed$meta$total_found,
+      "actual_query_result" = ifelse(
+        as.numeric(parsed$meta$max_results) <= parsed$meta$total_found,
+        as.numeric(parsed$meta$max_results), parsed$meta$total_found)
+      )
   }
 }
