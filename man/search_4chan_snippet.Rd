@@ -28,16 +28,20 @@ search_4chan_snippet(
 )
 }
 \arguments{
-\item{start_date}{String, Start date of post search. Format: "YYY-MM-DD", Default: ''}
+\item{start_date}{String, Start date of post search. Format: "YYY-MM-DD",
+Default: ''}
 
-\item{end_date}{String, End date of post search. Format: "YYY-MM-DD", Default: ''}
+\item{end_date}{String, End date of post search. Format: "YYY-MM-DD",
+Default: ''}
 
 \item{boards}{String or string vector of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{text}{String, Searchterms in post text. Regex possible, Default: ''}
 
-\item{subject}{String, Searchterms in post subject. Regex possible, Default: ''}
+\item{subject}{String, Searchterms in post subject. Regex possible,
+Default: ''}
 
 \item{filename}{String, Searchterms in filename. Regex possible, Default: ''}
 
@@ -47,33 +51,44 @@ Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", 
 
 \item{tripcode}{String, Filter by tripcode, Default: ''}
 
-\item{type}{String, Filter by post type: "all", "sticky", "op", "posts", Default: 'all'}
+\item{type}{String, Filter by post type: "all", "sticky", "op", "posts",
+Default: 'all'}
 
 \item{username}{String, Search username, Default: ''}
 
-\item{country}{String, Filter by country. Format: ISO 3166-1 Alpha-2 country code, Default: ''}
+\item{country}{String, Filter by country. Format: ISO 3166-1 Alpha-2
+country code, Default: ''}
 
-\item{results}{String, Return post matches or the thread they are found in. Possible values: "all", "thread", Default: ''}
+\item{results}{String, Return post matches or the thread they are found in.
+Possible values: "all", "thread", Default: ''}
 
-\item{show_only}{String, Show only posts containing data types: "all", "text", "image", Default: 'all'}
+\item{show_only}{String, Show only posts containing data types: "all",
+"text", "image", Default: 'all'}
 
-\item{deleted}{String, Filter deletion status: "all", "not-deleted", "deleted", Default: 'all'}
+\item{deleted}{String, Filter deletion status: "all", "not-deleted",
+"deleted", Default: 'all'}
 
-\item{capcode}{String, Filter author type: "all", "user", "ver", "mod", "dev", "admin", "manager", "founder", Default: 'all'}
+\item{capcode}{String, Filter author type: "all", "user", "ver", "mod",
+"dev", "admin", "manager", "founder", Default: 'all'}
 
-\item{order}{String, Return posts ordered by latest or oldest: "asc", "desc", Default: 'asc'}
+\item{order}{String, Return posts ordered by latest or oldest: "asc",
+"desc", Default: 'asc'}
 
-\item{cool}{Integer (seconds), The 4plebs API includes an API rate limit of 5 requests/min for the archive search. For multiple searches a cool-down is recommended , Default: 0}
+\item{cool}{Integer (seconds), The 4plebs API includes an API rate limit of
+5 requests/min for the archive search. For multiple searches a cool-down is
+recommended , Default: 0}
 
 \item{page}{Index of search result, Default: 1}
 
-\item{result_type}{String, Return output on the post level or only the number of posts found: "snippet", "results_num", Default: 'snippet'}
+\item{result_type}{String, Return output on the post level or only the
+number of posts found: "snippet", "results_num", Default: 'snippet'}
 }
 \value{
 Dataframe with details on the most recent/oldest posts found.
 }
 \description{
-This function returns latest or oldest 4chan posts specified by searchterms
+This function returns latest or oldest 4chan posts specified by
+searchterms
 }
 \details{
 Variables in API output:\cr\cr
@@ -91,21 +106,28 @@ comments: Text of the post\cr
 poster_country: Author country\cr
 nreplies: Number of replies
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post\cr\cr
+media_link: Download link to the media (e.g. images) that have been shared
+in the post\cr\cr
 
 If result_type is "results_num":\cr
 total_found: All number of total posts found with this query\cr
-actual_query_result: The 4plebs API limits the search results shown. This limit is 100,000 results. If the number of total posts found exceeds this limit, the actual_query_results are capped.
+actual_query_result: The 4plebs API limits the search results shown. This
+limit is 100,000 results. If the number of total posts found exceeds this
+limit, the actual_query_results are capped.
 }
 \examples{
 \dontrun{
-t <- search_4chan_snippet(boards = "adv", text = "kitties", show_only = "image")
+t <- search_4chan_snippet(boards = "adv", text = "kitties",
+show_only = "image")
 
-search_4chan_snippet(boards = "pol", country = "BR", result_type = "results_num")
+search_4chan_snippet(boards = "pol", country = "BR",
+result_type = "results_num")
 }
 }
 \seealso{
-\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+  \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+  \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
  \code{\link[stringr]{str_extract}}

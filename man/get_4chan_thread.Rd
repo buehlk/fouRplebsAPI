@@ -8,7 +8,8 @@ get_4chan_thread(board, thread_id)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{thread_id}{Dataframe with details of all posts in the thread.}
 }
@@ -34,7 +35,8 @@ comments: Text of the post
 poster_country: Author country\cr
 nreplies: Number of replies\cr
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post
+media_link: Download link to the media (e.g. images) that have been shared in
+ the post
 }
 \examples{
 \dontrun{
@@ -44,7 +46,9 @@ get_4chan_thread(board = "trv", thread_id = 1888747)
 }
 }
 \seealso{
-\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+ \code{\link[httr]{GET}}, \code{\link[httr]{http_type}},
+ \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
  \code{\link[stringr]{str_extract}}

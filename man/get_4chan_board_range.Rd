@@ -14,21 +14,25 @@ get_4chan_board_range(
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{page_start}{Integer, Start of page range}
 
 \item{page_stop}{Integer, End of page range}
 
-\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE}
+\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies,
+FALSE: Return only opening posts, Default: TRUE}
 
-\item{cool}{Integer (seconds), The 4plebs API includes an undocumented API rate limit, a cool-down period is recommended. , Default: 5}
+\item{cool}{Integer (seconds), The 4plebs API includes an undocumented API
+rate limit, a cool-down period is recommended. , Default: 5}
 }
 \value{
 Dataframe with details on all posts on a given board page.
 }
 \description{
-This function returns the threads from range of board page indices, starting from the latest thread
+This function returns the threads from range of board page
+indices, starting from the latest thread
 }
 \details{
 Variables in API output:\cr\cr
@@ -46,12 +50,14 @@ comments: Text of the post\cr
 poster_country: Author country\cr
 nreplies: Number of replies\cr
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post
+media_link: Download link to the media (e.g. images) that have been shared
+in the post
 }
 \examples{
 \dontrun{
 get_4chan_board_range(board = "o", page_start = 1, page_stop = 2)
 
-get_4chan_board_range(board = "o", page_start = 1, page_stop = 2, latest_comments = TRUE)
+get_4chan_board_range(board = "o", page_start = 1, page_stop = 2,
+latest_comments = TRUE)
 }
 }

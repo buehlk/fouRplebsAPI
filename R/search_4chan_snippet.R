@@ -139,10 +139,11 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                                simplifyVector = FALSE)
 
   if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
+    statuscode <- httr:status_code(resp)
     stop(
       sprintf(
         "4plebs.org API request failed [%s]\n%s",
-        httr::status_code(resp),
+        statuscode,
         parsed$error
       ),
       call. = FALSE

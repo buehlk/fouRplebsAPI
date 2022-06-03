@@ -8,19 +8,24 @@ get_4chan_board_index(board, page, latest_comments = TRUE, cool = 0)
 }
 \arguments{
 \item{board}{Character variable of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{page}{Integer of the board page index}
 
-\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies, FALSE: Return only opening posts, Default: TRUE}
+\item{latest_comments}{Boolean, TRUE: Return opening posts and all replies,
+FALSE: Return only opening posts, Default: TRUE}
 
-\item{cool}{Integer (seconds), The 4plebs API includes an undocumented API rate limit for the board index search. For multiple searches a cool-down is recommended , Default: 0}
+\item{cool}{Integer (seconds), The 4plebs API includes an undocumented API
+rate limit for the board index search. For multiple searches a cool-down is
+recommended , Default: 0}
 }
 \value{
 Dataframe with details on all posts on a given board page.
 }
 \description{
-This function returns all 10 threads from a given board page index, starting from the latest thread
+This function returns all 10 threads from a given board page
+index, starting from the latest thread
 }
 \details{
 Variables in API output:\cr\cr
@@ -38,7 +43,8 @@ comments: Text of the post\cr
 poster_country: Author country\cr
 nreplies: Number of replies\cr
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post
+media_link: Download link to the media (e.g. images) that have been shared
+in the post
 }
 \examples{
 \dontrun{
@@ -48,7 +54,8 @@ get_4chan_board_index(board = "mo", page = 1, latest_comments = FALSE)
 }
 }
 \seealso{
-\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}}, \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
+\code{\link[httr]{modify_url}}, \code{\link[httr]{user_agent}},
+ \code{\link[httr]{GET}}, \code{\link[httr]{http_type}}, \code{\link[httr]{content}}, \code{\link[httr]{http_error}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
  \code{\link[purrr]{map}}, \code{\link[purrr]{map2}}
  \code{\link[stringr]{str_extract}}

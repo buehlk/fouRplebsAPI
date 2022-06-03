@@ -26,16 +26,20 @@ search_4chan(
 )
 }
 \arguments{
-\item{start_date}{String, Start date of post search. Format: "YYY-MM-DD", Default: ''}
+\item{start_date}{String, Start date of post search. Format: "YYY-MM-DD",
+Default: ''}
 
-\item{end_date}{String, End date of post search. Format: "YYY-MM-DD", Default: ''}
+\item{end_date}{String, End date of post search. Format: "YYY-MM-DD",
+Default: ''}
 
 \item{boards}{String or string vector of the 4chan board.\cr
-Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", "trv", "f", "sp", "mlpol", "mo".}
+Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
+"o", "trv", "f", "sp", "mlpol", "mo".}
 
 \item{text}{String, Searchterms in post text. Regex possible, Default: ''}
 
-\item{subject}{String, Searchterms in post subject. Regex possible, Default: ''}
+\item{subject}{String, Searchterms in post subject. Regex possible,
+Default: ''}
 
 \item{filename}{String, Searchterms in filename. Regex possible, Default: ''}
 
@@ -45,23 +49,32 @@ Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol", "o", 
 
 \item{tripcode}{String, Filter by tripcode, Default: ''}
 
-\item{type}{String, Filter by post type: "all", "sticky", "op", "posts", Default: 'all'}
+\item{type}{String, Filter by post type: "all", "sticky", "op", "posts",
+Default: 'all'}
 
 \item{username}{String, Search username, Default: ''}
 
-\item{country}{String, Filter by country. Format: ISO 3166-1 Alpha-2 country code, Default: ''}
+\item{country}{String, Filter by country. Format:
+ISO 3166-1 Alpha-2 country code, Default: ''}
 
-\item{results}{String, Return post matches or the thread they are found in. Possible values: "all", "thread", Default: 'all'}
+\item{results}{String, Return post matches or the thread they are found in.
+Possible values: "all", "thread", Default: 'all'}
 
-\item{show_only}{String, Show only posts containing data types: "all", "text", "image", Default: 'all'}
+\item{show_only}{String, Show only posts containing data types: "all",
+"text", "image", Default: 'all'}
 
-\item{deleted}{String, Filter deletion status: "all", "not-deleted", "deleted", Default: 'all'}
+\item{deleted}{String, Filter deletion status: "all", "not-deleted",
+"deleted", Default: 'all'}
 
-\item{capcode}{String, Filter author type: "all", "user", "ver", "mod", "dev", "admin", "manager", "founder", Default: 'all'}
+\item{capcode}{String, Filter author type: "all", "user", "ver", "mod",
+"dev", "admin", "manager", "founder", Default: 'all'}
 
-\item{order}{String, Return posts ordered by latest or oldest: "asc", "desc", Default: 'asc'}
+\item{order}{String, Return posts ordered by latest or oldest: "asc",
+"desc", Default: 'asc'}
 
-\item{cool}{Integer (seconds), The 4plebs API includes an API rate limit of 5 requests/min for the archive search. For multiple searches a cool-down is recommended , Default: 20}
+\item{cool}{Integer (seconds), The 4plebs API includes an API rate limit
+of 5 requests/min for the archive search. For multiple searches a cool-down
+is recommended , Default: 20}
 }
 \value{
 Dataframe with details of the posts found.
@@ -85,7 +98,8 @@ comments: Text of the post\cr
 poster_country: Author country\cr
 nreplies: Number of replies\cr
 formatted: Boolean, Has this post been formatted?\cr
-media_link: Download link to the media (e.g. images) that have been shared in the post
+media_link: Download link to the media (e.g. images) that have been shared
+in the post
 }
 \examples{
 \dontrun{

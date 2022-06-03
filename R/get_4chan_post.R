@@ -1,4 +1,4 @@
-#' @title Get specific 4chan post
+#' @title Return specific 4chan post
 #' @description Return 4chan post by looking up its ID
 #' @param board Character variable of the 4chan board.\cr
 #' Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
@@ -57,13 +57,13 @@ get_4chan_post <- function(board, post_id) {
   parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
                                simplifyVector = FALSE)
 
-  if (httr::http_error(resp)|is.null(parsed[["error"]]) == F) {
+  if (httr::http_error(resp)|is.null(parsed[["error"]]) == FALSE) {
+    statuscode <- httr:status_code(resp)
     stop(
       sprintf(
-        "GitHub API request failed [%s]\n%s\n<%s>",
-        httr::status_code(resp),
-        parsed$message,
-        parsed$documentation_url
+        "4plebs.org API request failed [%s]\n%s",
+        statuscode,
+        parsed$error
       ),
       call. = FALSE
     )
