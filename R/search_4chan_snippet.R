@@ -132,11 +132,11 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                   country, filename, deleted, ghost, filter, type, start_date,
                   end_date, results, order, page)
   url <- httr::modify_url("http://archive.4plebs.org/", path = path)
-  ua <- httr::user_agent("4Rplebs API")
-  resp <- httr::GET(url, ua)
-  if (httr::http_type(resp) != "application/json") {
-    stop("API did not return json", call. = FALSE)
-  }
+  # ua <- httr::user_agent("4Rplebs API")
+  # resp <- httr::GET(url, ua)
+  # if (httr::http_type(resp) != "application/json") {
+  #   stop("API did not return json", call. = FALSE)
+  # }
 
   parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),
                                simplifyVector = FALSE)
