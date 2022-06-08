@@ -15,6 +15,8 @@ Imports: httr, jsonlite, purrr, stringr, dplyr
 RoxygenNote: 7.2.0
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
     roxyglobals (>= 0.2.1),
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -23,3 +25,4 @@ Remotes:
 Roxygen: list(
     markdown = TRUE,
     roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
+VignetteBuilder: knitr
