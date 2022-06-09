@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 The R package fouRplebsAPI enables researchers to query the 4chan database archived by [4plebs.org](https://www.4plebs.org/). 
 This database is the largest ongoing archive of the ever-disappearing posts on the imageboard 4chan. With this package researchers can use the detailed search functionalities offered by 4plebs and retrieve structured data of the communication on 4chan.
 
-The package is based on [4plebs API documentation](https://4plebs.tech/foolfuuka/).
+The package is based on [4plebs API documentation](https://4plebs.tech/foolfuuka/). 
 
 The 4chan boards currently covered by 4plebs are:
 
