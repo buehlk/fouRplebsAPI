@@ -30,6 +30,11 @@ This database is the largest ongoing archive of the ever-disappearing posts on t
 
 The package is based on [4plebs API documentation](https://4plebs.tech/foolfuuka/). 
 
+If fouRplebsAPI is helpful for your research, please cite as:
+
+Buehling, K. (2022). fouRplebsAPI: R package for accessing 4chan posts via the 4plebs.org API (Version 0.9.0). https://doi.org/10.5281/zenodo.6637440
+
+
 
 ## Installation
 
