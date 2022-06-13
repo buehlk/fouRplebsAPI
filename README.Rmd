@@ -25,6 +25,15 @@ This database is the largest ongoing archive of the ever-disappearing posts on t
 
 The package is based on [4plebs API documentation](https://4plebs.tech/foolfuuka/). 
 
+## Installation
+
+You can install the fouRplebsAPI from GitHub with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("buehlk/fouRplebsAPI")
+```
+
 The 4chan boards currently covered by 4plebs are:
 
 ```{r echo = FALSE, results = 'asis', warning=FALSE}
@@ -36,14 +45,6 @@ kable(data.frame("Board name" = c("Politically Incorrect", "High Resolution", "T
 
 ```
 
-## Installation
-
-You can install the fouRplebsAPI from GitHub with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("buehlk/fouRplebsAPI")
-```
 
 ## Search the 4chan archive
 

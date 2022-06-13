@@ -1,6 +1,6 @@
 Package: fouRplebsAPI
 Type: Package
-Title: R implementation for the 4plebs.org API
+Title: R package for accessing 4chan posts via the 4plebs.org API
 Version: 0.9.0
 Author: person(given = "Kilian", family = "Buehling", role = c("aut", "cre"), email = kilian.buehling@fu-berlin.de)
 Maintainer: The package maintainer <kilian.buehling@fu-berlin.de>
