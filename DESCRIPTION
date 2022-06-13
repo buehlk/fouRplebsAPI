@@ -2,8 +2,13 @@ Package: fouRplebsAPI
 Type: Package
 Title: R package for accessing 4chan posts via the 4plebs.org API
 Version: 0.9.0
-Author:  person(given = "Kilian", family = "Buehling", email = "kilian.buehling@fu-berlin.de", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-5244-7547"))
+Authors@R:  c(person(
+  given = "Kilian", 
+  family = "Buehling", 
+  email = "kilian.buehling@fu-berlin.de", 
+  role = c("aut", "cre"), 
+  comment = c(ORCID = "0000-0002-5244-7547")
+  ))
 Maintainer: The package maintainer <kilian.buehling@fu-berlin.de>
 Description: This package allows queries to the 4plebs.org API. Researchers can thereby access the largest public 4chan archive, called 4plebs.org. 
     Visual and text data posted in 4chan can be searched whithin and across 4chan boards and can also be accessed with detailed queries and stored in a structured manner.
