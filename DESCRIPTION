@@ -1,7 +1,7 @@
 Package: fouRplebsAPI
 Type: Package
 Title: R implementation for the 4plebs.org API
-Version: 1.0.0
+Version: 0.9.0
 Author: person(given = "Kilian", family = "Buehling", role = c("aut", "cre"), email = kilian.buehling@fu-berlin.de)
 Maintainer: The package maintainer <kilian.buehling@fu-berlin.de>
 Description: This package allows queries to the 4plebs.org API. Researchers can thereby access the largest public 4chan archive, called 4plebs.org. 
