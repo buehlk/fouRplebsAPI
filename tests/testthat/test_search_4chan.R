@@ -13,3 +13,7 @@ test_that("search_4chan() works", {
                                      end_date = "2021-06-21",
                                      text = "mallorca|menorca"), "list")
 })
+
+#
+#
+#
