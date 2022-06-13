@@ -7,12 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="This package allows queries to the 4plebs.org API. Researchers can thereby access the largest public 4chan archive, called 4plebs.org. 
     Visual and text data posted in 4chan can be searched whithin and across 4chan boards and can also be accessed with detailed queries and stored in a structured manner.">
-<title>R implementation for the 4plebs.org API • fouRplebsAPI</title>
+<title>R package for accessing 4chan posts via the 4plebs.org API • fouRplebsAPI</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R implementation for the 4plebs.org API">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R package for accessing 4chan posts via the 4plebs.org API">
 <meta property="og:description" content="This package allows queries to the 4plebs.org API. Researchers can thereby access the largest public 4chan archive, called 4plebs.org. 
     Visual and text data posted in 4chan can be searched whithin and across 4chan boards and can also be accessed with detailed queries and stored in a structured manner.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -71,6 +71,13 @@
 <!-- badges: start -->
 <p>The R package fouRplebsAPI enables researchers to query the 4chan database archived by <a href="https://www.4plebs.org/" class="external-link">4plebs.org</a>. This database is the largest ongoing archive of the ever-disappearing posts on the imageboard 4chan. With this package researchers can use the detailed search functionalities offered by 4plebs and retrieve structured data of the communication on 4chan.</p>
 <p>The package is based on <a href="https://4plebs.tech/foolfuuka/" class="external-link">4plebs API documentation</a>.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the fouRplebsAPI from GitHub with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"buehlk/fouRplebsAPI"</span><span class="op">)</span></code></pre></div>
 <p>The 4chan boards currently covered by 4plebs are:</p>
 <table class="table">
 <thead><tr class="header">
@@ -132,13 +139,6 @@
 </tr>
 </tbody>
 </table>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install the fouRplebsAPI from GitHub with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"buehlk/fouRplebsAPI"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="search-the-4chan-archive">Search the 4chan archive<a class="anchor" aria-label="anchor" href="#search-the-4chan-archive"></a>
@@ -152,17 +152,17 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">recentAdv</span>, vec.len <span class="op">=</span> <span class="fl">1</span>, nchar.max <span class="op">=</span> <span class="fl">60</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    20 obs. of  15 variables:</span>
-<span class="co">#&gt;  $ thread_id          : chr  "26651404" ...</span>
-<span class="co">#&gt;  $ doc_id             : chr  "12954077" ...</span>
-<span class="co">#&gt;  $ num                : chr  "26651404" ...</span>
+<span class="co">#&gt;  $ thread_id          : chr  "26681705" ...</span>
+<span class="co">#&gt;  $ doc_id             : chr  "12984374" ...</span>
+<span class="co">#&gt;  $ num                : chr  "26681705" ...</span>
 <span class="co">#&gt;  $ subnum             : chr  "0" ...</span>
 <span class="co">#&gt;  $ op                 : num  1 1 ...</span>
-<span class="co">#&gt;  $ timestamp          : int  1654759855 1654758961 ...</span>
-<span class="co">#&gt;  $ fourchan_date      : chr  "6/9/22(Thu)3:30" ...</span>
+<span class="co">#&gt;  $ timestamp          : int  1655104915 1655104180 ...</span>
+<span class="co">#&gt;  $ fourchan_date      : chr  "6/13/22(Mon)3:21" ...</span>
 <span class="co">#&gt;  $ name               : chr  "Anonymous" ...</span>
 <span class="co">#&gt;  $ title              : logi  NA ...</span>
 <span class="co">#&gt;  $ referencing_comment: logi  NA ...</span>
-<span class="co">#&gt;  $ comments           : chr  "I'm 29y old, 180cm tall, average fit build "| __truncated__ ...</span>
+<span class="co">#&gt;  $ comments           : chr  "For the first time I found a girl that want"| __truncated__ ...</span>
 <span class="co">#&gt;  $ poster_country     : logi  NA ...</span>
 <span class="co">#&gt;  $ nreplies           : logi  NA ...</span>
 <span class="co">#&gt;  $ formatted          : logi  FALSE ...</span>
