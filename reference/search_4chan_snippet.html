@@ -86,62 +86,103 @@ searchterms</p>
     <dl><dt>start_date</dt>
 <dd><p>String, Start date of post search. Format: "YYY-MM-DD",
 Default: ''</p></dd>
+
+
 <dt>end_date</dt>
 <dd><p>String, End date of post search. Format: "YYY-MM-DD",
 Default: ''</p></dd>
+
+
 <dt>boards</dt>
 <dd><p>String or string vector of the 4chan board.<br>
 Available boards are: "adv", "plebs", "hr", "tg", "tv", "x", "s4s", "pol",
 "o", "trv", "f", "sp", "mlpol", "mo".</p></dd>
+
+
 <dt>text</dt>
 <dd><p>String, Searchterms in post text. Regex possible, Default: ''</p></dd>
+
+
 <dt>subject</dt>
 <dd><p>String, Searchterms in post subject. Regex possible,
 Default: ''</p></dd>
+
+
 <dt>filename</dt>
 <dd><p>String, Searchterms in filename. Regex possible, Default: ''</p></dd>
+
+
 <dt>ghost</dt>
 <dd><p>String, Filter by: "all", "only", "none" , Default: 'all'</p></dd>
+
+
 <dt>user_id</dt>
 <dd><p>Integer, Filter by user_id, Default: ''</p></dd>
+
+
 <dt>tripcode</dt>
 <dd><p>String, Filter by tripcode, Default: ''</p></dd>
+
+
 <dt>type</dt>
 <dd><p>String, Filter by post type: "all", "sticky", "op", "posts",
 Default: 'all'</p></dd>
+
+
 <dt>username</dt>
 <dd><p>String, Search username, Default: ''</p></dd>
+
+
 <dt>country</dt>
 <dd><p>String, Filter by country. Format: ISO 3166-1 Alpha-2
 country code, Default: ''</p></dd>
+
+
 <dt>results</dt>
 <dd><p>String, Return post matches or the thread they are found in.
 Possible values: "all", "thread", Default: ''</p></dd>
+
+
 <dt>show_only</dt>
 <dd><p>String, Show only posts containing data types: "all",
 "text", "image", Default: 'all'</p></dd>
+
+
 <dt>deleted</dt>
 <dd><p>String, Filter deletion status: "all", "not-deleted",
 "deleted", Default: 'all'</p></dd>
+
+
 <dt>capcode</dt>
 <dd><p>String, Filter author type: "all", "user", "ver", "mod",
 "dev", "admin", "manager", "founder", Default: 'all'</p></dd>
+
+
 <dt>order</dt>
 <dd><p>String, Return posts ordered by latest or oldest: "asc",
 "desc", Default: 'asc'</p></dd>
+
+
 <dt>cool</dt>
 <dd><p>Integer (seconds), The 4plebs API includes an API rate limit of
 5 requests/min for the archive search. For multiple searches a cool-down is
 recommended , Default: 0</p></dd>
+
+
 <dt>page</dt>
 <dd><p>Index of search result, Default: 1</p></dd>
+
+
 <dt>result_type</dt>
 <dd><p>String, Return output on the post level or only the
 number of posts found: "snippet", "results_num", Default: 'snippet'</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Dataframe with details on the most recent/oldest posts found.</p>
+    
+
+<p>Dataframe with details on the most recent/oldest posts found.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -198,7 +239,7 @@ limit, the actual_query_results are capped.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
