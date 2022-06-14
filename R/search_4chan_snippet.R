@@ -204,6 +204,12 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
 
     name <- parsed[[1]][["posts"]] %>%
       purrr::map("name") %>%
+      lapply(., is.null) %>%
+      unlist() %>%
+      unname()
+    name[which(name == TRUE)] <- NA
+    name[which(name == FALSE)] <- parsed[[1]][["posts"]] %>%
+      purrr::map("name") %>%
       unlist() %>%
       unname()
 
