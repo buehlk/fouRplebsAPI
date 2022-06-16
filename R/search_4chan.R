@@ -91,15 +91,42 @@ search_4chan <- function(start_date = "", end_date = "", boards, text = "",
 
   range <- 1:ceiling(search_results_num/25)
   print(paste("Approximate time:",
-              round(ceiling(search_results_num/25)*20/60, 2), "minutes."))
-  do.call("rbind", lapply(range, function(i){
-    search_4chan_snippet(start_date = start_date, end_date = end_date,
-                         boards, text = text, subject = subject,
-                         filename = filename, ghost = ghost, user_id = user_id,
-                         tripcode = tripcode, type = type,
-                         username = username, country = country,
-                         results = results, show_only = show_only,
-                         deleted = deleted, capcode = capcode, order = order,
-                         cool = cool, result_type = "snippet", page = i)})
+              round(ceiling((search_results_num/25)+1)*20/60, 2), "minutes."))
+
+  query_result <- data.frame("thread_id" = rep(NA, search_results_num),
+                             "doc_id" = NA,
+                             "num" = NA,
+                             "subnum" = NA,
+                             "op" = NA,
+                             "timestamp" = NA,
+                             "fourchan_date" = NA,
+                             "name" = NA,
+                             "title" = NA,
+                             "referencing_comment" = NA,
+                             "comments" = NA,
+                             "poster_country" = NA,
+                             "nreplies" = NA,
+                             "formatted" = NA,
+                             "media_link" = NA
   )
+
+
+  for(i in range){
+    search_res <- search_4chan_snippet(start_date = start_date,
+                                       end_date = end_date,
+                                       boards, text = text, subject = subject,
+                                       filename = filename, ghost = ghost,
+                                       user_id = user_id, tripcode = tripcode,
+                                       type = type, username = username,
+                                       country = country, results = results,
+                                       show_only = show_only, deleted = deleted,
+                                       capcode = capcode, order = order,
+                                       cool = cool, result_type = "snippet",
+                                       page = i)
+    query_result[is.na(query_result$thread_id), ][1:nrow(search_res), ] <-
+      search_res
+    }
+
+  query_result
+
 }
