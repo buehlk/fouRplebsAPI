@@ -123,6 +123,8 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                        "founder"))
   match.arg(result_type, c("snippet", "results_num"))
 
+  text <- paste('"', text, '"')
+
   path <- sprintf(paste0("_/api/chan/search/?boards=%s&email=&username=%s",
                          "&tripcode=%s&capcode=%s&subject=%s&text=%s&uid=%s",
                          "&country=%s&filename=%s&image=&deleted=%s&ghost=%s",

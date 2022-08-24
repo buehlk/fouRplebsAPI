@@ -67,6 +67,7 @@ search_4chan <- function(start_date = "", end_date = "", boards, text = "",
                          show_only = "all", deleted = "all", capcode = "user",
                          order = "asc", cool = 20){
   #API limit of max. 5 requests per minute
+  text <- paste('"', text, '"')
 
   total_results_num <- search_4chan_snippet(start_date = start_date,
                                             end_date = end_date, boards,

@@ -14,6 +14,7 @@ test_that("search_4chan() works", {
                                      text = "mallorca|menorca"), "list")
 })
 
+
 #
 #
 #
