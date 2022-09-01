@@ -168,17 +168,17 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">recentAdv</span>, vec.len <span class="op">=</span> <span class="fl">1</span>, nchar.max <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    20 obs. of  15 variables:</span></span>
-<span><span class="co">#&gt;  $ thread_id          : chr  "27169577" ...</span></span>
-<span><span class="co">#&gt;  $ doc_id             : chr  "13472126" ...</span></span>
-<span><span class="co">#&gt;  $ num                : chr  "27169577" ...</span></span>
+<span><span class="co">#&gt;  $ thread_id          : chr  "27222721" ...</span></span>
+<span><span class="co">#&gt;  $ doc_id             : chr  "13525270" ...</span></span>
+<span><span class="co">#&gt;  $ num                : chr  "27222721" ...</span></span>
 <span><span class="co">#&gt;  $ subnum             : chr  "0" ...</span></span>
 <span><span class="co">#&gt;  $ op                 : num  1 1 ...</span></span>
-<span><span class="co">#&gt;  $ timestamp          : int  1661335791 1661335644 ...</span></span>
-<span><span class="co">#&gt;  $ fourchan_date      : chr  "8/24/22(Wed)6:09" ...</span></span>
+<span><span class="co">#&gt;  $ timestamp          : int  1662028087 1662027875 ...</span></span>
+<span><span class="co">#&gt;  $ fourchan_date      : chr  "9/1/22(Thu)6:28" ...</span></span>
 <span><span class="co">#&gt;  $ name               : chr  "Anonymous" ...</span></span>
 <span><span class="co">#&gt;  $ title              : logi  NA ...</span></span>
 <span><span class="co">#&gt;  $ referencing_comment: logi  NA ...</span></span>
-<span><span class="co">#&gt;  $ comments           : chr  "I like to read, I'm good at interpreting an"| __truncated__ ...</span></span>
+<span><span class="co">#&gt;  $ comments           : chr  "This world promotes mediocrity and felt out"| __truncated__ ...</span></span>
 <span><span class="co">#&gt;  $ poster_country     : logi  NA ...</span></span>
 <span><span class="co">#&gt;  $ nreplies           : logi  NA ...</span></span>
 <span><span class="co">#&gt;  $ formatted          : logi  FALSE ...</span></span>
@@ -190,8 +190,8 @@
 <p>First, to get a first impression of the search results, one can inspect a snippet of the 25 most recent posts containing the search term “mallorca”.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mallorca_snippet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/search_4chan_snippet.html">search_4chan_snippet</a></span><span class="op">(</span>boards <span class="op">=</span> <span class="st">"trv"</span>, start_date <span class="op">=</span> <span class="st">"2021-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2022-12-31"</span>, text <span class="op">=</span> <span class="st">"mallorca"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; The 1 - 25 oldest posts of the 90 total search results are shown.</span></span>
-<span><span class="co">#&gt; Scraping all 90 results would take ~ 1.33 minutes.</span></span>
+<span><span class="co">#&gt; The 1 - 25 oldest posts of the 91 total search results are shown.</span></span>
+<span><span class="co">#&gt; Scraping all 91 results would take ~ 1.33 minutes.</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mallorca_snippet</span>, vec.len <span class="op">=</span> <span class="fl">1</span>, nchar.max <span class="op">=</span> <span class="fl">60</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    25 obs. of  15 variables:</span></span>
