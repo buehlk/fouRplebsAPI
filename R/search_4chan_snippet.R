@@ -123,7 +123,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                        "founder"))
   match.arg(result_type, c("snippet", "results_num"))
 
-  text <- paste('"', text, '"')
+  text <- paste0("\"", text, "\"")
 
   path <- sprintf(paste0("_/api/chan/search/?boards=%s&email=&username=%s",
                          "&tripcode=%s&capcode=%s&subject=%s&text=%s&uid=%s",
@@ -135,7 +135,7 @@ search_4chan_snippet <- function(start_date = "", end_date = "", boards,
                   end_date, results, order, page)
   url <- httr::modify_url("http://archive.4plebs.org/", path = path)
   ua <- httr::user_agent("4Rplebs API")
-  resp <- httr::GET(url, ua)
+  resp <- utils::URLencode(url) %>%  httr::GET(., ua)
   # if (httr::http_type(resp) != "application/json") {
   #   stop("API did not return json", call. = FALSE)
   # }
